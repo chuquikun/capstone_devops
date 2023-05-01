@@ -3,18 +3,22 @@
 install:
 	# This instruction creates an environment with all the requirements and dependencies needed
 	conda env create --file dashboard.yml
+	
 	# Activate environment
 	conda activate dash_avocado
+	
 	# install eksctl
 	curl --silent --location "https://github.com/weaveworks/eksctl/releases/download/latest_release/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
     sudo mv /tmp/eksctl /bin
 	chmod +x /bin/eksctl
+	
 	# install kubectl
 	curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 	curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
     echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
 	sudo install -o root -g root -m 0755 kubectl /bin/kubectl
 	chmod +x /bin/kubectl
+	
 	# install hadolint
 	wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.16.3/hadolint-Linux-x86_64 &&\
 	chmod +x /bin/hadolint
