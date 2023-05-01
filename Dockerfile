@@ -1,8 +1,9 @@
 # Base image
-FROM continuumio/miniconda3
+FROM continuumio/miniconda3:22.11.1
 
-# Working Directory
-WORKDIR "/project/"
+# Working Direct
+ ENV work /project/
+WORKDIR ${work}
 
 # Copy source code to working directory
 COPY my_app ./my_app/
