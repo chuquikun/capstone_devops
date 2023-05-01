@@ -5,6 +5,8 @@ jobs:
     docker:
       - image: continuumio/miniconda3
     
+    working_directory: /mnt/ramdisk
+    
     steps:
       # Step 1: obtain repo from GitHub
       - checkout
