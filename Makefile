@@ -5,7 +5,7 @@ install:
 	conda env create --file dashboard.yml
 	
 	# Activate environment
-	conda activate dash_avocado
+	source activate dash_avocado
 	
 	# install eksctl
 	curl --silent --location "https://github.com/weaveworks/eksctl/releases/download/latest_release/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
