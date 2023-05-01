@@ -16,9 +16,11 @@ jobs:
           command: |
             apt-get update && apt-get install make curl -y
             make install
+            conda info --envs
       - run:
           name: run lint
           command: |
+            conda info --envs
             source activate dashboard.yml
             make lint 
 
