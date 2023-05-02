@@ -5,7 +5,7 @@ CONTAINER_PORT=80
 # kubernetes cluster is needed
 #${KUBECTL} get nodes
 # deploy app to the to kubernetes cluster
-aws eks --region $AWS_REGION update-kubeconfig --name $CLUSTER_NAME
+aws eks --region us-east-1 update-kubeconfig --name dashboard
 ${KUBECTL} apply -f manifests/deployment_manifest.yml
 ## use a load balancer service to access externally the application
 #

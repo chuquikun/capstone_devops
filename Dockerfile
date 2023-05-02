@@ -14,5 +14,5 @@ COPY Makefile ./
 RUN conda env create --file ./dashboard.yml
 
 # Run python app within the container
-EXPOSE 80
+EXPOSE 8080
 ENTRYPOINT ["conda", "run", "-n", "dash_avocado", "python", "my_app/app.py"]
