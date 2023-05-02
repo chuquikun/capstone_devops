@@ -26,9 +26,11 @@ install_kube_deps:
 	chmod +x /bin/eksctl
 	
 	# install kubectl
-	curl -sSLo ~/.local/bin/kubectl "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-	chmod +x ~/.local/bin/kubectl
-	kubectl version --client
+	curl -sSLo "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+	chmod +x kubectl
+	mkdir -p ~/.local/bin
+	mv ./kubectl ~/.local/bin/kubectl
+	~/.local/bin/kubectl version --client
 
 
 test:
