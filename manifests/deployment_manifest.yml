@@ -17,4 +17,4 @@ spec:
         - name: back-end
           image: 530835307231.dkr.ecr.us-east-1.amazonaws.com/capstone:blue
           ports:
-            - containerPort: 80
+            - containerPort: 8080

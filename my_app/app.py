@@ -173,5 +173,5 @@ def update_charts(region, avocado_type, start_date, end_date):
 
 if __name__ == "__main__":
     app.logger.info("starting application server ...")
-    app.run_server(debug=True, host="0.0.0.0", port=80)
+    app.run_server(debug=True, host="0.0.0.0", port=8080)
 
