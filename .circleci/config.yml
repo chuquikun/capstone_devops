@@ -20,6 +20,7 @@ jobs:
           command: |
             conda info --envs
             source activate dash_avocado
+            pip install pylint pulint_flask
             make lint 
 
 
