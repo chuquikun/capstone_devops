@@ -46,7 +46,7 @@ jobs:
       - run:
           name: install make and curl
           command: |
-            apt-get update && apt-get install make curl -y
+            apt-get update && apt-get install make curl zip unzip -y
             make install_kube_deps
       - aws-cli/setup:
           aws-access-key-id: AWS_ACCESS_KEY_ID
