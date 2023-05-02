@@ -43,6 +43,11 @@ jobs:
 
     steps:
       - checkout
+      - run:
+          name: install make and curl
+          command: |
+            apt-get update && apt-get install make curl -y
+            make install_kube_deps
       - aws-cli/setup:
           aws-access-key-id: AWS_ACCESS_KEY_ID
           aws-secret-access-key: AWS_SECRET_ACCESS_KEY
@@ -51,8 +56,6 @@ jobs:
       - run:
           name: set infra
           command: |
-            apt-get update && apt-get install make curl -y
-            make install_kube_deps
             make create-cluster
 
 
