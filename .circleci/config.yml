@@ -36,4 +36,4 @@ workflows:
           dockerfile: Dockerfile
           path: .
           repo: capstone
-          tag: "capstone:red"       
+          tag: "red"       
