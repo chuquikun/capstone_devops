@@ -90,6 +90,10 @@ jobs:
         - kubernetes/install-kubectl
 
         # create virtual env and install dependencies
+        - aws-cli/setup:
+            aws-access-key-id: AWS_ACCESS_KEY_ID
+            aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+            aws-region: AWS_REGION
         - run:
             name: set infra
             command: |
