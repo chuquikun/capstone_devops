@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
+CLUSTER_NAME=dashboard
 
-if kubectl config get-clusters | grep -q dashboard; then
+if eksctl utils describe-stacks --region=us-east-1 --cluster=${CLUSTER_NAME} | grep -q ${CLUSTER_NAME}; then
     echo "Cluster already exists!"
 else
     echo "Creating..."
