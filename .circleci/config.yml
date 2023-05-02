@@ -24,20 +24,16 @@ jobs:
             source activate dash_avocado
             pip install pylint pylint_flask
             make lint 
-            
-  build_and_push_image:
-    jobs:
-      - aws-ecr/build-and-push-image:
-          context: aws-dev
-          create-repo: false
-          dockerfile: Dockerfile
-          path: .
-          repo: capstone
-          tag: "capstone:red"
 
 
 workflows:
   default:
     jobs:
 #      - init_env
-      - build_and_push_image        
+      - aws-ecr/build-and-push-image:
+          context: aws-dev
+          create-repo: false
+          dockerfile: Dockerfile
+          path: .
+          repo: capstone
+          tag: "capstone:red"       
