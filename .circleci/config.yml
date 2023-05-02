@@ -80,21 +80,21 @@ jobs:
   #          make deploy_app
 
 
-application-deployment:
-    docker:
-      - image: cimg/base:stable
+  application-deployment:
+      docker:
+        - image: cimg/base:stable
 
 
-    steps:
-      - checkout
-      - kubernetes/install-kubectl
+      steps:
+        - checkout
+        - kubernetes/install-kubectl
 
-      # create virtual env and install dependencies
-      - run:
-          name: set infra
-          command: |
-            # aws eks update-kubeconfig --region ${AWS_REGION}  --name ${EKS_CLUSTER_NAME}
-            make deploy_app
+        # create virtual env and install dependencies
+        - run:
+            name: set infra
+            command: |
+              # aws eks update-kubeconfig --region ${AWS_REGION}  --name ${EKS_CLUSTER_NAME}
+              make deploy_app
 
 
 #  create-update:
