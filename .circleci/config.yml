@@ -68,7 +68,7 @@ jobs:
             aws-secret-access-key: AWS_SECRET_ACCESS_KEY
             aws-region: AWS_REGION
         - run:
-            name: set infra
+            name: deploy app
             command: |
               aws eks update-kubeconfig --region ${AWS_REGION}  --name ${EKS_CLUSTER_NAME}
               make deploy_app
@@ -89,7 +89,7 @@ jobs:
             aws-secret-access-key: AWS_SECRET_ACCESS_KEY
             aws-region: AWS_REGION
         - run:
-            name: set infra
+            name: update app
             command: |
               aws eks update-kubeconfig --region ${AWS_REGION}  --name ${EKS_CLUSTER_NAME}
               make update_app
