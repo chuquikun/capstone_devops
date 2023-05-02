@@ -6,7 +6,6 @@ import numpy as np
 import logging
 from dash.dependencies import Output, Input
 
-This is a mistake made on purpose
 data = pd.read_csv("my_app/data/avocado.csv")
 data["Date"] = pd.to_datetime(data["Date"], format="%Y-%m-%d")
 data.sort_values("Date", inplace=True)
