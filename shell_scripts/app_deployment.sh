@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-KUBECTL=${HOME}/bin/kubectl
+KUBECTL=kubectl
 LOAD_BALANCER=loadbalancer-service
 CONTAINER_PORT=80
 # kubernetes cluster is needed
