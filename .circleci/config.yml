@@ -63,24 +63,15 @@ jobs:
   application-deployment:
     docker:
       - image: continuumio/miniconda3:22.11.1
-    
-    executor: aws-cli/default
+
 
     steps:
       - checkout
-      - run:
-          name: install make and curl
-          command: |
-            apt-get update && apt-get install make curl zip unzip awscli -y
-            make install_kube_deps
-      - aws-cli/setup:
-          aws-access-key-id: AWS_ACCESS_KEY_ID
-          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
-          aws-region: AWS_REGION
       # create virtual env and install dependencies
       - run:
           name: set infra
           command: |
+            aws eks update-kubeconfig --region ${AWS_REGION}  --name ${EKS_CLUSTER_NAME}
             make deploy_app
 
 #  create-update:
