@@ -38,6 +38,7 @@ install_kube_deps:
 	mkdir -p ${HOME}/bin && cp ./kubectl ${HOME}/bin/kubectl && export PATH=${PATH}:${HOME}/bin
 	ls ${HOME}/bin -a
 	${HOME}/bin/kubectl version --short --client
+	ls ${HOME} -a
 	diff ~/.kube/config ~/.kube/config-backup
 
     
