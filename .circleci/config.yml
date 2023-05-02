@@ -26,12 +26,15 @@ jobs:
             make lint 
             
   aws-ecr/build_and_push_image:
-    context: aws-dev
-    create-repo: false
-    dockerfile: Dockerfile
-    path: .
-    repo: capstone
-    tag: "capstone:red"
+    docker:
+      - image: continuumio/miniconda3:22.11.1
+    steps:
+      context: aws-dev
+      create-repo: false
+      dockerfile: Dockerfile
+      path: .
+      repo: capstone
+      tag: "capstone:red"
 
 
 workflows:
