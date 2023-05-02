@@ -19,7 +19,8 @@ external_stylesheets = [
     },
 ]
 
-logging.basicConfig(filename='my_app/record.log', level=logging.DEBUG, format=f'%(asctime)s %(levelname)s %(name)s : %(message)s')
+FORMAT = '%(asctime)s %(levelname)s %(name)s : %(message)s'
+logging.basicConfig(filename='my_app/record.log', level=logging.DEBUG, format=FORMAT)
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 server = app.server
 app.title = "Avocado Analytics: Understand Your Avocados!"
