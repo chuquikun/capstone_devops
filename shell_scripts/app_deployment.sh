@@ -2,7 +2,7 @@
 LOAD_BALANCER=loadbalancer-service
 
 # kubernetes cluster is needed
-~/.local/bin/kubectl get nodes
+kubectl get nodes
 # deploy app to the to kubernetes cluster
 ./bin/kubectl apply -f manifests/deployment_manifest.yml
 # use a load balancer service to access externally the application
