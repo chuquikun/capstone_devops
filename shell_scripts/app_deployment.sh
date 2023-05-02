@@ -15,7 +15,7 @@ else
 fi
 
 # the external-ip for the service can be retrieved from this output
-kubectl get service/loadbalancer-service |  awk {'print $1" " $2 " " $4 " " $5'} | column -t
+#kubectl get service/loadbalancer-service |  awk {'print $1" " $2 " " $4 " " $5'} | column -t
 # See the status
 kubectl get deploy,rs,svc,pods
 
