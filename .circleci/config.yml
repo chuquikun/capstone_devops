@@ -27,20 +27,26 @@ jobs:
             pip install pylint pylint_flask
             make lint 
 
-  aws-cli-cred-setup:
-    executor: aws-cli/default
-    steps:
-      - aws-cli/setup:
-          aws-access-key-id: AWS_ACCESS_KEY_ID
-          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
-          aws-region: AWS_REGION
+  #aws-cli-cred-setup:
+  #  executor: aws-cli/default
+  #  steps:
+  #    - aws-cli/setup:
+  #        aws-access-key-id: AWS_ACCESS_KEY_ID
+  #        aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+  #        aws-region: AWS_REGION
 
   create_set_infra:
     docker:
       - image: continuumio/miniconda3:22.11.1
+    
+    executor: aws-cli/default
 
     steps:
       - checkout
+      - aws-cli/setup:
+          aws-access-key-id: AWS_ACCESS_KEY_ID
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+          aws-region: AWS_REGION
       # create virtual env and install dependencies
       - run:
           name: set infra
@@ -63,8 +69,7 @@ workflows:
       #    tag: "green"
       #    requires:
       #          - init_env
-      - aws-cli-cred-setup:
-          context: aws-dev
+      #- aws-cli-cred-setup:
+      #    context: aws-dev
       - create_set_infra:
-          requires:
-            - aws-cli-cred-setup
+          context: aws-dev
