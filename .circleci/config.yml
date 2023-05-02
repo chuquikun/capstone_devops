@@ -93,7 +93,7 @@ jobs:
         - run:
             name: set infra
             command: |
-              # aws eks update-kubeconfig --region ${AWS_REGION}  --name ${EKS_CLUSTER_NAME}
+              aws eks update-kubeconfig --region ${AWS_REGION}  --name ${EKS_CLUSTER_NAME}
               make deploy_app
 
 
