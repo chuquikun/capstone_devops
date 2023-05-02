@@ -125,3 +125,5 @@ workflows:
       #      - create_set_infra
       - create-update:
           context: aws-dev
+          requires:
+            - create_set_infra
