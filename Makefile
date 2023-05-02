@@ -31,7 +31,7 @@ install_kube_deps:
 	mkdir -p ${HOME}/bin && cp ./kubectl ${HOME}/bin/kubectl && export PATH=${PATH}:${HOME}/bin
 	ls ${HOME}/bin
 	echo 'export PATH=${PATH}:${HOME}/bin' >> ~/.bashrc
-	kubectl version --short --client
+	${HOME}/bin/kubectl version --short --client
 
     
 
