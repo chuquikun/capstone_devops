@@ -54,6 +54,9 @@ delete-cluster:
 cleanup-kubernetes:
 	./shell_scripts/delete_kubernetes_stuff.sh
 
+deploy_app:
+	./shell_scripts/app_deployment.sh
+
 update_app:
 	./shell_scripts/update_application.sh
 
