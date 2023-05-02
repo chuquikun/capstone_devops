@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 KUBECTL=${HOME}/bin/kubectl
 LOAD_BALANCER=loadbalancer-service
-
+CONTAINER_PORT=80
 # kubernetes cluster is needed
-${KUBECTL} get nodes
+#${KUBECTL} get nodes
 # deploy app to the to kubernetes cluster
-#${KUBECTL} apply -f manifests/deployment_manifest.yml
+${KUBECTL} apply -f manifests/deployment_manifest.yml
 ## use a load balancer service to access externally the application
 #
 #if ${KUBECTL} get service  | grep -q ${LOAD_BALANCER}; then
