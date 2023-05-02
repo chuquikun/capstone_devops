@@ -26,10 +26,13 @@ install_kube_deps:
 	chmod +x /bin/eksctl
 	
 	# install kubectl
-	curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-	chmod +x kubectl
-	mkdir -p ~/.local/bin
-	mv ./kubectl ~/.local/bin/kubectl
+	curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.26.2/2023-03-17/bin/linux/arm64/kubectl
+	chmod +x ./kubectl
+	mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
+	echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
+	kubectl version --short --client
+
+
 
 
 test:
