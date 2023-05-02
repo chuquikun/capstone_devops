@@ -3,6 +3,7 @@ version: 2.1
 orbs:
   aws-ecr: circleci/aws-ecr@8.1.3
   aws-cli: circleci/aws-cli@2.0.6
+  kubernetes: circleci/kubernetes@x.y.z
 
 jobs:
   init_env:
@@ -82,6 +83,24 @@ jobs:
           command: |
             make deploy_app
 
+  create-update:
+    docker:
+      - image: cimg/base:stable
+    
+    executor: aws-cli/default
+    steps:
+      - checkout
+      - aws-cli/setup:
+          aws-access-key-id: AWS_ACCESS_KEY_ID
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+          aws-region: AWS_REGION
+      - kubernetes/install-kubectl
+      - kubernetes/create-or-update-resource:
+          get-rollout-status: true
+          resource-file-path: manifest/deployment.yml
+          resource-name: deployment/server
+          show-kubectl-command: true
+
 
 workflows:
   default:
@@ -100,7 +119,9 @@ workflows:
       #    context: aws-dev
       - create_set_infra:
           context: aws-dev
-      - application-deployment:
+      #- application-deployment:
+      #    context: aws-dev
+      #    requires:
+      #      - create_set_infra
+      - create-update:
           context: aws-dev
-          requires:
-            - create_set_infra
