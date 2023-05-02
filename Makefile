@@ -26,11 +26,12 @@ install_kube_deps:
 	chmod +x /bin/eksctl
 
 	# install awscli
-	#curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-	#unzip awscliv2.zip
-	#./aws/install --update
-	#mv ~/.kube/config ~/.kube/config.bk
-	#aws --version
+	curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+	unzip awscliv2.zip
+	./aws/install --update
+	ls ${HOME} -a
+	mv ~/.kube/config ~/.kube/config.bk
+	aws --version
 	
 	# install kubectl
 	curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.24.11/2023-03-17/bin/linux/amd64/kubectl
