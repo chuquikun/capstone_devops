@@ -34,9 +34,10 @@ jobs:
       - checkout
       # create virtual env and install dependencies
       - run:
-          name: install dependencies
+          name: set infra
           command: |
             apt-get update && apt-get install make
+            make install_kube_deps
             make create-cluster
 
 
