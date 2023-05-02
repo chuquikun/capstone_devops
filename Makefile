@@ -30,7 +30,6 @@ install_kube_deps:
 	chmod +x kubectl
 	mkdir -p ~/.local/bin
 	mv ./kubectl ~/.local/bin/kubectl
-	~/.local/bin/kubectl version --client
 
 
 test:
