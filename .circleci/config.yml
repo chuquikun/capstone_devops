@@ -29,11 +29,13 @@ jobs:
 workflows:
   default:
     jobs:
-#      - init_env
+      - init_env
       - aws-ecr/build-and-push-image:
           context: aws-dev
           create-repo: false
           dockerfile: Dockerfile
           path: .
           repo: capstone
-          tag: "red"       
+          tag: "green"
+          requires:
+                - init_env
