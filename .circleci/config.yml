@@ -15,7 +15,8 @@ jobs:
           name: install dependencies
           command: |
             apt-get update && apt-get install make curl -y
-            make install
+            make set_env
+            make install_kube_deps
             conda info --envs
       - run:
           name: run lint
@@ -25,17 +26,31 @@ jobs:
             pip install pylint pylint_flask
             make lint 
 
+  create_set_infra:
+    docker:
+      - image: continuumio/miniconda3:22.11.1
+
+    steps:
+      - checkout
+      # create virtual env and install dependencies
+      - run:
+          name: install dependencies
+          command: |
+            apt-get update && apt-get install make
+            make create-cluster
+
 
 workflows:
   default:
     jobs:
-      - init_env
-      - aws-ecr/build-and-push-image:
-          context: aws-dev
-          create-repo: false
-          dockerfile: Dockerfile
-          path: .
-          repo: capstone
-          tag: "green"
-          requires:
-                - init_env
+      #- init_env
+      #- aws-ecr/build-and-push-image:
+      #    context: aws-dev
+      #    create-repo: false
+      #    dockerfile: Dockerfile
+      #    path: .
+      #    repo: capstone
+      #    tag: "green"
+      #    requires:
+      #          - init_env
+      - create_set_infra

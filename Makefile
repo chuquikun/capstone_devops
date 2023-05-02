@@ -1,6 +1,6 @@
 ## The Makefile includes instructions on environment setup and lint tests
 
-install:
+set_env:
 	# This instruction creates an environment with all the requirements and dependencies needed
 	conda env create --file dashboard.yml
 	
@@ -17,6 +17,19 @@ install:
 	# install hadolint
 	wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.16.3/hadolint-Linux-x86_64 &&\
 	chmod +x /bin/hadolint
+
+install_kube_deps:
+
+	# install eksctl
+	curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_linux_amd64.tar.gz" | tar xz -C /tmp
+	mv /tmp/eksctl /bin
+	chmod +x /bin/eksctl
+	
+	# install kubectl
+	curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+	install -o root -g root -m 0755 kubectl /bin/kubectl
+	chmod +x /bin/kubectl
+
 
 test:
 	# Additional, optional, tests could go here
