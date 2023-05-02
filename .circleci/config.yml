@@ -28,13 +28,6 @@ jobs:
             pip install pylint pylint_flask
             make lint 
 
-  #aws-cli-cred-setup:
-  #  executor: aws-cli/default
-  #  steps:
-  #    - aws-cli/setup:
-  #        aws-access-key-id: AWS_ACCESS_KEY_ID
-  #        aws-secret-access-key: AWS_SECRET_ACCESS_KEY
-  #        aws-region: AWS_REGION
 
   create_set_infra:
     docker:
@@ -58,26 +51,6 @@ jobs:
           name: set infra
           command: |
             make create-cluster
-
-
-  #application-deployment:
-  #  docker:
-  #    - image: continuumio/miniconda3:22.11.1
-#
-#
-  #  steps:
-  #    - checkout
-  #    - run:
-  #        name: install make and curl
-  #        command: |
-  #          apt-get update && apt-get install make curl zip unzip -y
-  #          make install_kube_deps
-  #    # create virtual env and install dependencies
-  #    - run:
-  #        name: set infra
-  #        command: |
-  #          aws eks update-kubeconfig --region ${AWS_REGION}  --name ${EKS_CLUSTER_NAME}
-  #          make deploy_app
 
 
   application-deployment:
@@ -122,40 +95,19 @@ jobs:
               make update_app
 
 
-#  create-update:
-#    docker:
-#      - image: cimg/base:stable
-#    
-#    executor: aws-cli/default
-#    steps:
-#      - checkout
-#      - aws-cli/setup:
-#          aws-access-key-id: AWS_ACCESS_KEY_ID
-#          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
-#          aws-region: AWS_REGION
-#      - kubernetes/install-kubectl
-#      - kubernetes/create-or-update-resource:
-#          get-rollout-status: true
-#          resource-file-path: manifest/deployment.yml
-#          resource-name: deployment/server
-#          show-kubectl-command: true
-
-
 workflows:
   default:
     jobs:
-      #- init_env
-      #- aws-ecr/build-and-push-image:
-      #    context: aws-dev
-      #    create-repo: false
-      #    dockerfile: Dockerfile
-      #    path: .
-      #    repo: capstone
-      #    tag: "green"
-      #    requires:
-      #          - init_env
-      #- aws-cli-cred-setup:
-      #    context: aws-dev
+      - init_env
+      - aws-ecr/build-and-push-image:
+          context: aws-dev
+          create-repo: false
+          dockerfile: Dockerfile
+          path: .
+          repo: capstone
+          tag: "green"
+          requires:
+                - init_env
       - create_set_infra:
           context: aws-dev
       - application-deployment:
@@ -166,7 +118,4 @@ workflows:
           context: aws-dev
           requires:
             - application-deployment
-      #- create-update:
-      #    context: aws-dev
-      #    requires:
-      #      - create_set_infra
+            - aws-ecr/build-and-push-image
