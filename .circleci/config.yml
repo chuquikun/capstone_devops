@@ -101,6 +101,27 @@ jobs:
               make deploy_app
 
 
+  update-deployment:
+      docker:
+        - image: cimg/base:stable
+
+
+      steps:
+        - checkout
+        - kubernetes/install-kubectl
+
+        # create virtual env and install dependencies
+        - aws-cli/setup:
+            aws-access-key-id: AWS_ACCESS_KEY_ID
+            aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+            aws-region: AWS_REGION
+        - run:
+            name: set infra
+            command: |
+              aws eks update-kubeconfig --region ${AWS_REGION}  --name ${EKS_CLUSTER_NAME}
+              make update_app
+
+
 #  create-update:
 #    docker:
 #      - image: cimg/base:stable
@@ -141,6 +162,10 @@ workflows:
           context: aws-dev
           requires:
             - create_set_infra
+      - update-deployment:
+          context: aws-dev
+          requires:
+            - application-deployment
       #- create-update:
       #    context: aws-dev
       #    requires:

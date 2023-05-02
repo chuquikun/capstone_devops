@@ -10,7 +10,7 @@ kubectl set image deployments/${DEPLOYMENT_NAME} \
 
 echo
 # the external-ip for the service can be retrieved from this output
-kubectl get service/loadbalancer-service |  awk {'print $1" " $2 " " $4 " " $5'} | column -t
+kubectl get service/loadbalancer-service
 echo
 # In order to see the rollout status
 kubectl get rs -o wide

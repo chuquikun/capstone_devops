@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 KUBECTL=kubectl
 LOAD_BALANCER=loadbalancer-service
-CONTAINER_PORT=80
 # kubernetes cluster is needed
 #${KUBECTL} get nodes
 # deploy app to the to kubernetes cluster
