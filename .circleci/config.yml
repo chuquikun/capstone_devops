@@ -25,18 +25,19 @@ jobs:
             pip install pylint pylint_flask
             make lint 
             
-  aws-ecr/build_and_push_image:
+  build_and_push_image:
     jobs:
-      context: aws-dev
-      create-repo: false
-      dockerfile: Dockerfile
-      path: .
-      repo: capstone
-      tag: "capstone:red"
+      - aws-ecr/build-and-push-image:
+          context: aws-dev
+          create-repo: false
+          dockerfile: Dockerfile
+          path: .
+          repo: capstone
+          tag: "capstone:red"
 
 
 workflows:
   default:
     jobs:
 #      - init_env
-      - aws-ecr/build_and_push_image        
+      - build_and_push_image        
